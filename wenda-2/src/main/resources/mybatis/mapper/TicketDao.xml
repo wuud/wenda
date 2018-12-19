@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wenda.dao.TicketDao">
+
+	<sql id="ticket_fields">user_id,ticket,expired,status</sql>
+	<insert id="insertTicket">
+		insert into ticket(user_id,ticket,expired,status) 
+					values(#{user_id},#{ticket},#{expired},#{status})
+	</insert>
+	<select id="getTicketByTicket" resultMap="ticket">
+		select <include refid="ticket_fields"></include> 
+		from ticket where ticket=#{ticket}
+	</select>
+	<resultMap type="cn.wenda.model.Ticket" id="ticket">
+		<id property="id" column="id"/>
+		<result property="user_id" column="user_id"/>
+	</resultMap>
+	<update id="updateStatus">
+		update ticket set status=#{status} where ticket=#{ticket}
+	</update>
+</mapper>
