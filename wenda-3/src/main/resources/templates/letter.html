@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>消息记录</title>
+<link rel="stylesheet" href="../styles/letter.css">
+</head>
+<body>
+	<div class="My" th:replace="header::header"></div>
+	<div id="main">
+		<div class="zg-wrap zu-main clearfix ">
+			<ul class="letter-list">
+				<div th:each="c:${conversations}">
+				<li id="conversation-item-10001_622873"><a class="letter-link"
+					th:href="'/msg/detail?conversationId='+${c['conversation'].conversationId}">
+				</a>
+					<div class="letter-info">
+						<span class="l-time" th:text="${#dates.format(c['conversation'].createdDate,'yyyy/MM/dd HH:mm:ss')}"></span>
+						<div class="l-operate-bar">
+
+							<a th:href="'/msg/detail?conversationId='+${c['conversation'].conversationId}">
+								</a>
+						</div>
+					</div>
+					<div class="chat-headbox">
+						<span class=" js-voteCount msg-num " th:if="${c['unread']!=0}"th:text="${c['unread']}"> </span> 
+						<a
+							class="list-head"> <img alt="头像"
+							th:src="${c['user'].head_url}">
+						</a>
+					</div>
+					<div class="letter-detail">
+						<a title="${c['user'].name}"
+							class="letter-name level-color-1" th:text="${c['user'].name}"></a>
+						<p class="letter-brief">
+							<a
+								th:href="'/msg/detail?conversationId='+${c['conversation'].conversationId}">
+								<font th:text="${c['conversation'].content}"></font> </a>
+						</p>
+					</div></li> 
+					</div>
+			</ul>
+
+		</div>
+	</div>
+	<div class="MyFooter" th:replace="footer::footer"></div>
+</body>
+</html>
