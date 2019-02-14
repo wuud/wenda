@@ -1,0 +1,29 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+2013-9-30: Created.
+-->
+<svg>
+<metadata>
+Created by iconfont
+</metadata>
+<defs>
+
+<font id="iconfont" horiz-adv-x="1024" >
+  <font-face
+    font-family="iconfont"
+    font-weight="500"
+    font-stretch="normal"
+    units-per-em="1024"
+    ascent="896"
+    descent="-128"
+  />
+    <missing-glyph />
+    
+    <glyph glyph-name="wen" unicode="&#59122;" d="M420.352 347.648h130.048v145.92H420.352v-145.92zM33.28 778.24v-675.84c0-61.952 50.688-112.64 112.64-112.64h619.52l225.28-112.64v112.64V778.24c0 61.952-50.688 112.64-112.64 112.64H145.92c-61.952 0-112.64-50.688-112.64-112.64z m237.056-643.584H204.8V647.168h65.536v-512.512zM262.144 739.328l59.392 26.112c29.184-35.328 56.32-75.264 81.92-120.832l-57.344-29.696c-25.6 47.616-53.76 89.088-83.968 124.416z m93.696-184.32H614.4v-268.8H355.84V555.008z m412.672-335.872c0-53.248-29.184-79.872-87.552-79.872H611.328l-16.384 59.904 72.192-1.536c23.552 0 35.328 12.8 35.328 37.888V662.528H447.488V724.48h321.024v-505.344z"  horiz-adv-x="1024" />
+
+    
+
+
+  </font>
+</defs></svg>
