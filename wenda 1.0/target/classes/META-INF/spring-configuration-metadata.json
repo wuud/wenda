@@ -1,0 +1,11 @@
+{
+  "groups": [
+    {
+      "name": "wenda",
+      "type": "cn.wenda.utils.Constants",
+      "sourceType": "cn.wenda.utils.Constants"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}

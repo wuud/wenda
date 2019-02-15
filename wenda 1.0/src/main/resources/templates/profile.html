@@ -2,10 +2,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title th:text="${profileUser['user'].name}">的主页</title>
+<title th:utext="${profileUser['user'].name}">的主页</title>
 <div class="My" th:replace="header::header"></div>
-<link rel="stylesheet" href="../styles/index.css">
-<link rel="stylesheet" href="../styles/detail.css">
+<link rel="stylesheet" th:href="@{/styles/index.css}">
+<link rel="stylesheet" th:href="@{/styles/detail.css}">
 </head>
 <body>
 
@@ -30,26 +30,26 @@
 									th:if="${!profileUser['followed']&&profileUser['display']}">关注</button>
 							</div>
 							<a title="Barty" class="zm-item-link-avatar"
-								th:href="'/user/'+${profileUser['user'].id}"> <img
+								th:href="@{/user/}+${profileUser['user'].id}"> <img
 								th:src="${profileUser['user'].head_url}"
 								class="zm-item-img-avatar">
 							</a>
 							<div class="zm-list-content-medium">
 								<h2 class="zm-list-content-title">
 									<a data-tip="p$t$buaabarty"
-										th:href="'/user/'+${profileUser['user'].id}" class="zg-link"
-										th:text="${profileUser['user'].name}"></a>
+										th:href="@{/user/}+${profileUser['user'].id}" class="zg-link"
+										th:utext="${profileUser['user'].name}"></a>
 								</h2>
 
 								<div class="details zg-gray">
 									<a target="_blank"
-										th:href="'/user/'+${profileUser['user'].id}+'/followers'"
+										th:href="@{/user/}+${profileUser['user'].id}+'/followers'"
 										class="zg-link-gray-normal"
-										th:text="${profileUser['followerCount']}+'粉丝'"></a> / 
+										th:utext="${profileUser['followerCount']}+'粉丝'"></a> / 
 										<a target="_blank"
-										th:href="'/user/'+${profileUser['user'].id}+'/followees'"
+										th:href="@{/user/}+${profileUser['user'].id}+'/followees'"
 										class="zg-link-gray-normal"
-										th:text="${profileUser['followeeCount']}+'关注'"></a>
+										th:utext="${profileUser['followeeCount']}+'关注'"></a>
 										
 								</div>
 							</div>
@@ -61,7 +61,7 @@
 		<div class="zu-main-content">
 			<div class="zu-main-content-inner">
 				<div class="zg-section" id="zh-home-list-title">
-					<i class="zg-icon zg-icon-feedlist"></i>最新动态 (共 <font th:text="${articleNum}"></font> 帖子)<span
+					<i class="zg-icon zg-icon-feedlist"></i>最新动态 (共 <font th:utext="${articleNum}"></font> 帖子)<span
 						class="zg-right zm-noti-cleaner-setting" style="list-style: none">
 						<a href="#"
 						class="zg-link-gray-normal"> <i
@@ -95,8 +95,8 @@
 										<meta itemprop="answer-url-token" content="13174385">
 										<h2 class="feed-title">
 											<a class="question_link" target="_blank"
-												th:href="'/question/'+${question.id}"
-												th:text="${question.title}"></a>
+												th:href="@{/question/}+${question.id}"
+												th:utext="${question.title}"></a>
 										</h2>
 										<div class="feed-question-detail-item">
 											<div class="question-description-plain zm-editable-content"></div>
@@ -104,13 +104,13 @@
 										<div class="expandable entry-body">
 											<div class="zm-item-vote">
 												<a class="zm-item-vote-count js-expand js-vote-count"
-														href="#" data-bind-votecount=""><font th:text="${question.comment_count}"></font></a>
+														href="#" data-bind-votecount=""><font th:utext="${question.comment_count}"></font></a>
 											</div>
 											<div class="zm-item-answer-author-info">
 												<a class="author-link" data-tip="p$b$amuro1230"
-													target="_blank" th:href="'/user/'+${question.user_id.id}"
-													th:text="${question.user_id.name}"></a> ，<font
-													th:text="${#dates.format(question.created_date,'yyyy/MM/dd HH:mm:ss')}"></font>
+													target="_blank" th:href="@{/user/}+${question.user_id.id}"
+													th:utext="${question.user_id.name}"></a> ，<font
+													th:utext="${#dates.format(question.created_date,'yyyy/MM/dd HH:mm:ss')}"></font>
 											</div>
 											<div class="zm-item-vote-info" data-votecount="4168"
 												data-za-module="VoteInfo">
@@ -123,7 +123,7 @@
 												data-author-name="李淼"
 												data-entry-url="/question/19857995/answer/13174385">
 												<div class="zh-summary summary clearfix"
-													th:text="${question.content}"></div>
+													th:utext="${question.content}"></div>
 											</div>
 										</div>
 										<div class="feed-meta">
@@ -136,7 +136,7 @@
 														class="z-icon-follow"></i>关注问题
 													</a> <a href="#"
 															class="meta-item toggle-comment js-toggleCommentBox">
-															<i class="z-icon-comment"></i><font th:text="${question.comment_count}"></font>
+															<i class="z-icon-comment"></i><font th:utext="${question.comment_count}"></font>
 														条评论
 													</a>
 
@@ -153,21 +153,21 @@
 							</div>
 						</div>
 					</div>
-					<a class="zu-top-add-question pagination" th:href="'/user/'+${userId}+'?page='+${pageNum}" style="margin-left: 10px">尾页</a>
-					<a class="zu-top-add-question pagination" th:href="'/user/'+${userId}+'?page='+${page+1}" style="margin-left: 10px">下一页</a>
+					<a class="zu-top-add-question pagination" th:href="@{/user/}+${userId}+'?page='+${pageNum}" style="margin-left: 10px">尾页</a>
+					<a class="zu-top-add-question pagination" th:href="@{/user/}+${userId}+'?page='+${page+1}" style="margin-left: 10px">下一页</a>
 					<div th:each="page:${pageList}">
 						<a class="zu-top-add-question pagination" style="margin-left: 10px"
-							th:href="'/user/'+${userId}+'?page='+${page}" th:text="${page+1}"></a>
+							th:href="'/user/'+${userId}+'?page='+${page}" th:utext="${page+1}"></a>
 					</div>
-					<a class="zu-top-add-question pagination"th:href="'/user/'+${userId}+'?page='+${page-1}" style="margin-left: 10px">上一页</a>
-					<a class="zu-top-add-question pagination"href="/" >首页</a>
+					<a class="zu-top-add-question pagination"th:href="@{/user/}+${userId}+'?page='+${page-1}" style="margin-left: 10px">上一页</a>
+					<a class="zu-top-add-question pagination" th:href="@{/user/}+${userId}" >首页</a>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="My" th:replace="footer::footer"></div>
 
-	<script type="text/javascript" src="/scripts/main/site/profile.js"></script>
+	<script type="text/javascript" th:src="@{/scripts/main/site/profile.js}"></script>
 
 </body>
 </html>

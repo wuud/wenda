@@ -52,6 +52,8 @@ public class FollowController {
 	FeedService feedService;
 	@Autowired
 	EventProducer eventProducer;
+	@Autowired
+	Constants constants;
 
 	/**
 	 * 实现关注用户功能
@@ -72,7 +74,7 @@ public class FollowController {
 		
 		User followedUser = userService.getUserById(userId);
 		String message="关注了用户"+followedUser.getName();
-		String url=Constants.HOST_NAME+"/user/"+userId;
+		String url=constants.hostName+"/user/"+userId;
 		feedService.addFeed(new Feed(hostHolder.getUser().getId(),message,new Date(),url));
 		
 		//当用户关注了某个用户，告诉被关注的用户谁关注了它
@@ -128,7 +130,7 @@ public class FollowController {
 		
 		Question question = questionService.getQuestionById(questionId);
 		String message="关注了问题："+question.getTitle();
-		String url=Constants.HOST_NAME+"/question/"+question.getId();
+		String url=constants.hostName+"/question/"+question.getId();
 		feedService.addFeed(new Feed(hostHolder.getUser().getId(),message,new Date(),url));
 		
 		Map<String, Object> info = new HashMap<>();

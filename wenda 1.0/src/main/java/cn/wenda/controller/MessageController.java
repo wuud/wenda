@@ -80,8 +80,11 @@ public class MessageController {
 	}
 	@RequestMapping(value="/msg/list")
 	public String messageList(Model model) {
-		int localUserId = hostHolder.getUser().getId();
 		
+		if(hostHolder.getUser()==null) {
+			return "redirect:/login?next=/msg/list";
+		}
+		Integer localUserId = hostHolder.getUser().getId();
 		List<Map<String,Object>> conversations = new ArrayList<Map<String,Object>>();
 		List<Message> conversationList = messageService.getConversationList(localUserId, 0, 10);
 		for (Message msg : conversationList) {

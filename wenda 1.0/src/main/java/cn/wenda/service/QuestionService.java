@@ -29,10 +29,7 @@ public class QuestionService {
         question.setContent(sensitiveWordService.filter(question.getContent()));
         questionDao.addQuestion(question);
 	}
-	public List<Question> containsWord(String word) {
-		String newWord="%"+word+"%";
-		return questionDao.containsWord(newWord);
-	}
+	
 	public void setPage(int page, int pageNum,Model model) {
 		List<Integer> list = new ArrayList<>();
 		int pageButtonNum = 7;
@@ -60,25 +57,41 @@ public class QuestionService {
 		questionDao.updateCommentCount(commentCount, questionId);
 	}
 	
-	public List<Question> getAllQuestion(){
-		return questionDao.getAllQuestion();
+	public List<Question> containsWord(String word) {
+		String newWord="%"+word+"%";
+		List<Question> list = questionDao.containsWord(newWord);
+		return list;
 	}
 	public List<Question> getQuestionByPage(int page,int pageSize){
 		int offsetNum=page*pageSize;
-		return questionDao.getQuestionByPage(pageSize, offsetNum);
+		List<Question> list = questionDao.getQuestionByPage(pageSize, offsetNum);
+		return list;
 	}
 	public List<Question> getUserQuestionsByPage(int userId,int page,int pageSize){
 		int offsetNum=page*pageSize;
-		return questionDao.getUserQuestionsByPage(userId,pageSize, offsetNum);
-	}
-	
-	
+		List<Question> list = questionDao.getUserQuestionsByPage(userId,pageSize, offsetNum);
+		return list;
+	}	
 	public List<Question> getUserAllQuestion(Integer user_id){
-		return questionDao.getUserAllQuestion(user_id);
+		List<Question> list = questionDao.getUserAllQuestion(user_id);
+		return list;
 	}
+	
 	public Question getQuestionById(Integer id) {
-		return questionDao.getQuestionById(id);
+		try {
+			Question question = questionDao.getQuestionById(id);
+			return question;
+		} catch (Exception e) {
+			System.err.println("没有该问题："+id);
+		}
+		return null;
+		
 	}
+	public Question getQuestionByTitle(String title) {
+		Question question = questionDao.getQuestionByTitle(title);
+		return question;
+	}
+	
 	public Integer countAllQuestion() {
 		return questionDao.countAllQuestion();
 	}
@@ -86,4 +99,5 @@ public class QuestionService {
 		return questionDao.countQuestionByUser(userId);
 	}
 
+	
 }

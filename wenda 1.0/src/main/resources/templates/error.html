@@ -6,7 +6,9 @@
     <meta name="renderer" content="webkit" />
     <title>发生错误</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/error.css" />
+    <link rel="stylesheet" th:href="@{/styles/error.css}" />
+    <link rel="icon" th:href="@{/images/img/wen.png}" type="image/x-icon" />
+    
   </head>
   <body>
     <div class="page">
@@ -22,7 +24,7 @@
          <p>来源链接是否正确？检查一下拼写</p>
          <hr>
          <p>
-           <a href="/">返回首页</a>
+           <a th:href="@{/}">返回首页</a>
          </p>
        </div>
       </div>

@@ -18,6 +18,15 @@
 		where q.id=#{id} and u.id=q.user_id
 	</select>
 
+	<select id="getQuestionByTitle" resultMap="Question">
+		select
+		<include refid="question_fileds"></include>
+		,
+		<include refid="user_fileds"></include>
+		from question q,user u
+		where q.title=#{title} and u.id=q.user_id
+	</select>
+
 	<select id="getAllQuestion" resultMap="Question">
 		select
 		<include refid="question_fileds"></include>

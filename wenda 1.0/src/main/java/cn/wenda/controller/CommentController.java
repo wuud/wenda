@@ -39,6 +39,9 @@ public class CommentController {
 	FeedService feedService;
 	@Autowired
 	QuestionService questionService;
+	@Autowired
+	Constants constants;
+	
 	@RequestMapping(value="/addComment",method=RequestMethod.POST)
 	public String addComment(@RequestParam("content") String content,
 							@RequestParam("questionId") int questionId) {
@@ -55,7 +58,7 @@ public class CommentController {
 		
 		Question question = questionService.getQuestionById(questionId);
 		String message="发布了新评论在："+ question.getTitle();
-		String url=Constants.HOST_NAME+"/question"+questionId;
+		String url=constants.hostName+"/question"+questionId;
 		feedService.addFeed(new Feed(hostHolder.getUser().getId(),message,new Date(),url));
 		
 		eventProducer.fireEvent(new EventModel(EventType.COMMENT)

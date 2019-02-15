@@ -29,9 +29,14 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 	 */
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
+//		registry.addInterceptor(requireLoginInterceptor).addPathPatterns("/user/**")
+//		.addPathPatterns("/question/**").addPathPatterns("/msg/**")
+//		.addPathPatterns("/pullfeeds");
+		
 		registry.addInterceptor(loginInterceptor);
-		registry.addInterceptor(requireLoginInterceptor).addPathPatterns("/user/**").addPathPatterns("/question/**").addPathPatterns("/msg/**");
+		
 		registry.addInterceptor(alreadyLoginInterceptor).addPathPatterns("/login");
+		
 		WebMvcConfigurer.super.addInterceptors(registry);
 	}
 

@@ -10,6 +10,8 @@ public interface QuestionDao {
 	
 	void insertQuestion(Question q);
 	Question getQuestionById(Integer id);
+	Question getQuestionByTitle(String title);
+	
 	void updateQuestion(Question q);
 	void addQuestion(Question question);
 	void updateCommentCount(@Param("commentCount")int commentCount,@Param("id")int questionId);

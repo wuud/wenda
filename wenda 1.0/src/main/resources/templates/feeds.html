@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <div th:replace="header::header"></div>
 
-<link rel="stylesheet" href="../styles/index.css">
-<link rel="stylesheet" href="../styles/detail.css">
+<link rel="stylesheet" th:href="@{/styles/index.css}">
+<link rel="stylesheet" th:href="@{/styles/detail.css}">
 <div class="zg-wrap zu-main clearfix " role="main">
 	<div class="zu-main-content">
 		<div class="zu-main-content-inner">
@@ -32,7 +32,7 @@
 							<div class="avatar">
 								<a th:title="${map['user'].name}" data-tip="p$t$amuro1230"
 									class="zm-item-link-avatar" target="_blank"
-									th:href="'/user/'+${map['user'].id}"> <img
+									th:href="@{/user/}+${map['user'].id}"> <img
 									th:src="${map['user'].head_url}" class="zm-item-img-avatar"></a>
 							</div>
 							<div class="feed-main">
@@ -40,10 +40,10 @@
 									<div class="expandable entry-body">
 										<div class="zm-item-answer-author-info">
 											<a class="author-link" data-tip="p$b$amuro1230"
-												target="_blank" th:href="'/user/'+${map['user'].id}"
-												th:text="${map['user'].name}"></a> 
-												<a th:href="${map['feed'].url}" th:text="${map['feed'].data}"></a>
-												<font style="float:right"th:text="${#dates.format(map['feed'].createdDate,'yyyy/MM/dd HH:mm:ss')}"></font>
+												target="_blank" th:href="@{/user/}+${map['user'].id}"
+												th:utext="${map['user'].name}"></a> 
+												<a th:href="${map['feed'].url}" th:utext="${map['feed'].data}"></a>
+												<font style="float:right"th:utext="${#dates.format(map['feed'].createdDate,'yyyy/MM/dd HH:mm:ss')}"></font>
 										</div>
 
 									</div>
@@ -60,7 +60,7 @@
 	</div>
 </div>
 
-<script type="text/javascript" src="/scripts/main/site/detail.js"></script>
+<script type="text/javascript" th:src="@{/scripts/main/site/detail.js}"></script>
 <div class="My" th:replace="footer::footer"></div>
 </body>
 </html>

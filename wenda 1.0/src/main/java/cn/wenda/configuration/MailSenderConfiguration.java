@@ -40,7 +40,7 @@ public class MailSenderConfiguration {
 		ClassLoaderTemplateResolver resolver=new ClassLoaderTemplateResolver();
 		resolver.setPrefix("templates/");
 		resolver.setSuffix(".html");
-		resolver.setTemplateMode("HTML5");
+		resolver.setTemplateMode("HTML");
 		resolver.setCharacterEncoding("UTF-8");
 		resolver.setOrder(2);
 		return resolver;

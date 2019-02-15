@@ -29,18 +29,20 @@ public class LikeHandler implements EventHandler {
 	MessageService messageService;
 	@Autowired
 	UserService userService;
+	@Autowired
+	Constants constants;
 
 
 	@Override
 	public void doHandle(EventModel model) {
 		Message message=new Message();
-		message.setFromId(Constants.SYSTEM_ID);
+		message.setFromId(constants.systemId);
 		message.setToId(model.getEntityOwnerId());
 		message.setCreatedDate(new Date());
 		message.setHasRead(0);
 		message.setConversationId(message.getFromId()+"_"+message.getToId());
 		User user=userService.getUserById(model.getActorId());
-		message.setContent("用户"+user.getName()+"赞了你的评论，链接地址："+Constants.HOST_NAME+"/question/"+model.getExts("questionId"));
+		message.setContent("用户"+user.getName()+"赞了你的评论，链接地址："+constants.hostName+"/question/"+model.getExts("questionId"));
 		messageService.addMessage(message);
 	}
 

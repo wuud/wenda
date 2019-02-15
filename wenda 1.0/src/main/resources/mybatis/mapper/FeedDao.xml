@@ -14,19 +14,11 @@
 		from feed 
 		where id=#{id}
 	</select>
-	<select id="selectUserFeeds" resultMap="feed">
+	<select id="getFeedByUser" resultMap="feed">
 		SELECT <include refid="feed_fields"/>
         FROM feed
 
-        WHERE id &lt; #{maxId}
-
-        <if test="userIds.size() != 0">
-            AND user_id in
-            <foreach item="item" index="index" collection="userIds"
-                     open="(" separator="," close=")">
-                #{item}
-            </foreach>
-        </if>
+        WHERE user_id = #{userId}
         ORDER BY id DESC
         LIMIT #{count}
 

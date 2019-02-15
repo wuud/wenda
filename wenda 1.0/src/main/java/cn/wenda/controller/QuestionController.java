@@ -45,10 +45,17 @@ public class QuestionController {
 	HostHolder hostHolder;
 	@Autowired
 	FeedService feedService;
+	@Autowired
+	Constants constants;
 
 	@RequestMapping(value = "/question/{id}")
 	public String getDetails(Model model, @PathVariable("id") int id) {
 		Question question = questionService.getQuestionById(id);
+		if(question==null) {
+			return "redirect:/error";
+		}else if(hostHolder.getUser()==null) {
+			return "redirect:/login?next=/question/"+id;
+		}
 		model.addAttribute("question", question);
 		List<Comment> commentList = commentService.getCommentsByEntity(id, EntityType.ENTITY_QUESTION);
 		int commentCount = commentService.countComment(question.getId(), EntityType.ENTITY_QUESTION);
@@ -97,6 +104,9 @@ public class QuestionController {
 	public String addQuestion(Model model, @RequestParam("title") String title,
 			@RequestParam("content") String content) {
 		try {
+			if(hostHolder.getUser()==null) {
+				return "redirect:/login";
+			}
 			Question question = new Question();
 			question.setComment_count(0);
 			question.setContent(content);
@@ -110,7 +120,9 @@ public class QuestionController {
 			questionService.addQuestion(question);
 			
 			String message="提出了新问题："+question.getTitle();
-			String url=Constants.HOST_NAME+"/question/"+question.getId();
+			
+			Question questionByTitle = questionService.getQuestionByTitle(title);
+			String url=constants.hostName+"/question/"+questionByTitle.getId();
 			feedService.addFeed(new Feed(hostHolder.getUser().getId(), message, new Date(),url));
 			return WendaUtil.getJSONString(0);
 		} catch (Exception e) {

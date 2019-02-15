@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import cn.wenda.utils.Constants;
+
 /**
  * 	拦截那些需要登录才能访问的网页，如果用户未登录，则跳转到登录页面
  * 
@@ -18,13 +20,17 @@ public class RequireLoginInterceptor implements HandlerInterceptor {
 	
 	@Autowired
 	HostHolder hostHolder;
+	@Autowired
+	Constants constants;
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		if(hostHolder.getUser()==null) {
-			response.sendRedirect("/login?next="+request.getRequestURI());
+			response.sendRedirect(constants.hostName+"/login?next="+request.getRequestURI());
+			return true;
 		}
+		
 		return true;
 	}
 

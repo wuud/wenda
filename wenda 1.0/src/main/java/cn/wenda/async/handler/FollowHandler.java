@@ -29,20 +29,22 @@ public class FollowHandler implements EventHandler {
 	UserService userService;
 	@Autowired
 	MessageService messageService;
+	@Autowired
+	Constants constants;
 
 	@Override
 	public void doHandle(EventModel model) {
 		Message message = new Message();
-		message.setFromId(Constants.SYSTEM_ID);
+		message.setFromId(constants.systemId);
 		message.setToId(model.getEntityOwnerId());
 		message.setCreatedDate(new Date());
 		message.setHasRead(0);
 		message.setConversationId(message.getFromId() + "_" + message.getToId());
 		User user = userService.getUserById(model.getActorId());
 		if (model.getEntityType() == EntityType.ENTITY_USER) {
-			message.setContent("用户 " + user.getName() + " 关注了你，查看用户：" +Constants.HOST_NAME +"/user/" + model.getActorId());
+			message.setContent("用户 " + user.getName() + " 关注了你，查看用户：" +constants.hostName +"/user/" + model.getActorId());
 		} else{
-			message.setContent("你发布的问题被 "+user.getName()+" 关注了，去看看吧：" + Constants.HOST_NAME +"/question/" + model.getActorId());
+			message.setContent("你发布的问题被 "+user.getName()+" 关注了，去看看吧：" + constants.hostName +"/question/" + model.getActorId());
 		}
 		messageService.addMessage(message);
 	}

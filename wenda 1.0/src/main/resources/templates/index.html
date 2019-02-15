@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <div th:replace="header::header"></div>
-<link rel="stylesheet" href="../styles/index.css">
-<link rel="stylesheet" href="../styles/detail.css">
+<link rel="stylesheet" th:href="@{/styles/index.css}">
+<link rel="stylesheet" th:href="@{/styles/detail.css}">
 
 <div class="zg-wrap zu-main clearfix " role="main">
 	<div class="zu-main-content">
@@ -37,7 +37,7 @@
 								<div class="avatar">
 									<a th:title="${question.user_id.name}" data-tip="p$t$"
 										class="zm-item-link-avatar" target="_blank"
-										th:href="'/user/'+${question.user_id.id}"> <img
+										th:href="@{/user/}+${question.user_id.id}"> <img
 										th:src="${question.user_id.head_url}"
 										class="zm-item-img-avatar"></a>
 								</div>
@@ -48,44 +48,40 @@
 										<meta itemprop="post-url-token" content="19831487">
 										<h2 class="feed-title">
 											<a target="_blank" class="post-link"
-												th:href="'question/'+${question.id}"><font
-												th:text="${question.title}"></font></a>
+												th:href="@{/question/}+${question.id}"><font
+												th:utext="${question.title}"></font></a>
 										</h2>
 										<div class="entry-body post-body js-collapse-body">
 											<div class="zm-item-vote">
 												<a class="zm-item-vote-count js-expand js-vote-count"
 													href="#" data-bind-votecount=""><font
-													th:text="${question.comment_count}"></font></a>
+													th:utext="${question.comment_count}"></font></a>
 											</div>
 
 											<div class="author-info">
-												<a th:href="'/user/'+${question.user_id.id}"
+												<a th:href="@{/user/}+${question.user_id.id}"
 													data-tip="p$t$user_name" class="name"><font
-													th:text="${question.user_id.name}"></font></a>
+													th:utext="${question.user_id.name}"></font></a>
 											</div>
 
-											<div class="post-content" data-author-name="赵永峰"
-												data-entry-url="http://zhuanlan.zhihu.com/p/19831487">
+											<div class="post-content" >
 												<textarea class="content hidden"><font
-														th:text="${question.content}"></font></textarea>
+														th:utext="${question.content}"></font></textarea>
 												<div class="zh-summary summary clearfix">
-													<font th:text="${question.content}"></font>
+													<font th:utext="${question.content}"></font>
 												</div>
-												<p class="hidden-default">
-													<a class="post-link entry-link" target="_blank"
-														href="http://zhuanlan.zhihu.com/p/19831487">2014-08-24</a>
-												</p>
+												
 											</div>
 										</div>
 										<div class="feed-meta">
 											<div class="zm-item-meta meta clearfix js-contentActions">
 												<div class="zm-meta-panel">
 													<a data-follow="c:link" class="zg-follow meta-item"
-														href="#" id="cl-2180"> <i class="z-icon-follow"></i>关注专栏
+														href="#" id="cl-2180" th:utext="${#dates.format(question.created_date,'yyyy/MM/dd')}"> 
 													</a> <a href="#"
 														class="meta-item toggle-comment js-toggleCommentBox">
 														<i class="z-icon-comment"></i><font
-														th:text="${question.comment_count}"></font>
+														th:utext="${question.comment_count}"></font>
 													</a> <a href="#"
 														class="meta-item zu-autohide js-share goog-inline-block goog-menu-button"
 														role="button" aria-expanded="false" tabindex="0"
@@ -119,14 +115,14 @@
 						</div>
 					</div>
 				</div>
-					<a class="zu-top-add-question pagination" th:href="'/?page='+${pageNum}" style="margin-left: 10px">尾页</a>
-					<a class="zu-top-add-question pagination" th:href="'/?page='+${page+1}" style="margin-left: 10px">下一页</a>
+					<a class="zu-top-add-question pagination" th:href="@{/?page=}+${pageNum}" style="margin-left: 10px">尾页</a>
+					<a class="zu-top-add-question pagination" th:href="@{/?page=}+${page+1}" style="margin-left: 10px">下一页</a>
 					<div th:each="page:${pageList}">
 						<a class="zu-top-add-question pagination" style="margin-left: 10px"
-							th:href="'/?page='+${page}" th:text="${page+1}"></a>
+							th:href="@{/?page=}+${page}" th:utext="${page+1}"></a>
 					</div>
-					<a class="zu-top-add-question pagination"th:href="'/?page='+${page-1}" style="margin-left: 10px">上一页</a>
-					<a class="zu-top-add-question pagination"href="/" >首页</a>
+					<a class="zu-top-add-question pagination"th:href="@{/?page=}+${page-1}" style="margin-left: 10px">上一页</a>
+					<a class="zu-top-add-question pagination" th:href="@{/}" >首页</a>
 			</div>
 		</div>
 	</div>

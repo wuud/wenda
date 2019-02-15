@@ -33,10 +33,12 @@ public class IndexController {
 	CommentService commentService;
 	@Autowired
 	FollowService followService;
+	@Autowired
+	Constants constants;
 
 	@RequestMapping(value = { "/" })
 	public String index(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
-		List<Question> questions = questionService.getQuestionByPage(page, Constants.PAGE_SIZE);
+		List<Question> questions = questionService.getQuestionByPage(page, constants.pageSize);
 		int pageNum = (questionService.countAllQuestion() / 10) + 1;
 
 		questionService.setPage(page, pageNum, model);
@@ -48,7 +50,11 @@ public class IndexController {
 	@RequestMapping("/user/{id}")
 	public String userIndex(Model model, @PathVariable("id") Integer user_id,
 			@RequestParam(value = "page", defaultValue = "0") int page) {
-		List<Question> questions = questionService.getUserQuestionsByPage(user_id, page, Constants.PAGE_SIZE);
+		
+		if(hostHolder.getUser()==null) {
+			return "redirect:/login?next=/user/"+user_id;
+		}
+		List<Question> questions = questionService.getUserQuestionsByPage(user_id, page, constants.pageSize);
 		model.addAttribute("questions", questions);
 		User user = userService.getUserById(user_id);
 		if (user == null) {

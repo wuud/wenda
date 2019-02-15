@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>粉丝列表</title>
-<link rel="stylesheet" href="../../styles/result.css">
-<link rel="stylesheet" href="../../styles/detail.css">
+<link rel="stylesheet" th:href="@{/styles/result.css}">
+<link rel="stylesheet" th:href="@{/styles/detail.css}">
 </head>
 <body>
 
@@ -14,7 +14,7 @@
             <div class="zm-profile-section-wrap zm-profile-followee-page">
                 <div class="zm-profile-section-head">
                     <span class="zm-profile-section-name">
-                        <font href="#" th:text="${curUser.name}+'粉丝' +${followerCount}+' 人'"></font> 
+                        <font href="#" th:utext="${curUser.name}+'粉丝' +${followerCount}+' 人'"></font> 
                     </span>
                 </div>
                 <div class="zm-profile-section-list">
@@ -29,16 +29,16 @@
                                     <button class="zg-btn zg-btn-follow zm-rich-follow-btn small nth-0
                                     js-follow-user">关注</button>
                                 </div>
-                                <a title="Barty" class="zm-item-link-avatar" th:href="'/user/'+${map['user'].id}">
+                                <a title="Barty" class="zm-item-link-avatar" th:href="@{/user/}+${map['user'].id}">
                                     <img th:src="${map['user'].head_url}" class="zm-item-img-avatar">
                                 </a>
                                 <div class="zm-list-content-medium">
-                                    <h2 class="zm-list-content-title"><a data-tip="p$t$buaabarty" th:href="'/user/'+${map['user'].id}" style="font-size:20px"th:text="${map['user'].name}"></a></h2>
+                                    <h2 class="zm-list-content-title"><a data-tip="p$t$buaabarty" th:href="@{/user/}+${map['user'].id}" style="font-size:20px"th:utext="${map['user'].name}"></a></h2>
 
                                     <div class="details zg-gray">
-                                        <a target="_blank" th:href="'/user/'+${map['user'].id}+'/followers'" class="zg-link-gray-normal" th:text="${map['followerCount']}+'粉丝'"></a>
+                                        <a target="_blank" th:href="@{/user/}+${map['user'].id}+'/followers'" class="zg-link-gray-normal" th:utext="${map['followerCount']}+'粉丝'"></a>
                                         /
-                                        <a target="_blank" th:href="'/user/'+${map['user'].id}+'/followees'" class="zg-link-gray-normal" th:text="${map['followeeCount']}+'关注'"></a>
+                                        <a target="_blank" th:href="@{/user/}+${map['user'].id}+'/followees'" class="zg-link-gray-normal" th:utext="${map['followeeCount']}+'关注'"></a>
                                         
                                     </div>
                                 </div>
@@ -51,7 +51,7 @@
         </div>
     </div>
 <div class="My1" th:replace="footer::footer"></div>
-<script type="text/javascript" src="/scripts/main/site/follow.js"></script>
+<script type="text/javascript" th:src="@{/scripts/main/site/follow.js}"></script>
 
 </body>
 </html>

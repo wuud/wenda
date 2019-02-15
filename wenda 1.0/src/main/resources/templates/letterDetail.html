@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>聊天</title>
 <div class="My" th:replace="header::header"></div>
-<link rel="stylesheet" href="../styles/letter.css">
+<link rel="stylesheet" th:href="@{/styles/letter.css}">
 
 </head>
 <body>
@@ -21,9 +21,9 @@
 						<div class="tooltip-arrow"></div>
 						<div class="tooltip-inner letter-chat clearfix">
 							<div class="letter-info">
-								<p class="letter-time" th:text="${#dates.format(message['message'].createdDate,'yyyy/MM/dd HH:mm:ss')}"></p>
+								<p class="letter-time" th:utext="${#dates.format(message['message'].createdDate,'yyyy/MM/dd HH:mm:ss')}"></p>
 							</div>
-							<p class="chat-content" th:text="${message['message'].content}"></p>
+							<p class="chat-content" th:utext="${message['message'].content}"></p>
 						</div>
 					</div></li> 
 					</div>

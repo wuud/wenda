@@ -38,30 +38,33 @@ public class FeedController {
 	@Autowired
 	JedisAdapterService jedisAdapter;
 
-	@RequestMapping(path = { "/pushfeeds" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String getPush(Model model) {
-		int localUserId = hostHolder.getUser() == null ? 0 : hostHolder.getUser().getId();
-		List<String> feedIds = jedisAdapter.lrange(RedisKeysUtil.getTimelineKey(localUserId), 0, 10);
-		List<Feed> feeds = new ArrayList<>();
-		for (String s : feedIds) {
-			Feed feed = feedService.getFeedById(Integer.parseInt(s));
-			if (feed != null) {
-				feeds.add(feed);
-			}
-		}
-		model.addAttribute("feeds", feeds);
-		return "feeds";
-	}
+//	@RequestMapping(path = { "/pushfeeds" }, method = { RequestMethod.GET, RequestMethod.POST })
+//	public String getPush(Model model) {
+//		int localUserId = hostHolder.getUser() == null ? 0 : hostHolder.getUser().getId();
+//		List<String> feedIds = jedisAdapter.lrange(RedisKeysUtil.getTimelineKey(localUserId), 0, 10);
+//		List<Feed> feeds = new ArrayList<>();
+//		for (String s : feedIds) {
+//			Feed feed = feedService.getFeedById(Integer.parseInt(s));
+//			if (feed != null) {
+//				feeds.add(feed);
+//			}
+//		}
+//		model.addAttribute("feeds", feeds);
+//		return "feeds";
+//	}
 
 	@RequestMapping(path = { "/pullfeeds" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String getPull(Model model) {
 		int localUserId = hostHolder.getUser() == null ? 0 : hostHolder.getUser().getId();
+		if(localUserId==0) {
+			return "redirect:/login";
+		}
 		List<Integer> followees = new ArrayList<>();
 		if (localUserId != 0) {
 			// 关注的人
 			followees = followService.getFollowees(localUserId, EntityType.ENTITY_USER, Integer.MAX_VALUE);
 		}
-		List<Feed> feeds = feedService.getUserFeeds(followees,Integer.MAX_VALUE,10);
+		List<Feed> feeds = feedService.getUserFeeds(followees,10);
 		List<Map<String,Object>> feedList=new ArrayList<>();
 		for(Feed f:feeds) {
 			Map<String,Object> map=new HashMap<>();

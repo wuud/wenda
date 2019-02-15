@@ -1,5 +1,6 @@
 package cn.wenda.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,13 @@ public class FeedService {
 	public Feed getFeedById(Integer id) {
 		return feedDao.getFeedById(id);
 	}
-	public List<Feed> getUserFeeds(List<Integer> userIds,int maxId,int count){
-		return feedDao.selectUserFeeds(maxId, userIds, count);
+	public List<Feed> getUserFeeds(List<Integer> userIds,int count){
+		List<Feed> list=new ArrayList<>();
+		for(int i:userIds) {
+			Feed feedByUser = feedDao.getFeedByUser(i, count);
+			list.add(feedByUser);
+		}
+		return list;
 	}
 
 }
