@@ -23,6 +23,7 @@ public class ExploreController {
 		List<Question> questionList=new ArrayList<>();
 		for(int i=0;i<10;i++) {
 			int randomId=(int)(Math.random()*(questionNum))+1;
+			System.out.println(randomId);
 			questionList.add(questionService.getQuestionById(randomId));
 		}
 		model.addAttribute("questions",questionList);

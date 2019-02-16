@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-CN" dropeffect="none" class="js is-AppPromotionBarVisible cssanimations csstransforms csstransitions flexbox no-touchevents no-mobile" style="" th:fragment="header">
-<head>
-<head>
+
 <meta charset="UTF-8">
 <title>消息记录</title>
+<div class="My" th:replace="header::header"></div>
 <link rel="stylesheet" th:href="@{/styles/letter.css}">
-</head>
-<body>
-	<div class="My" th:replace="header::header"></div>
+<link rel="stylesheet" th:href="@{/styles/index.css}">
+<link rel="stylesheet" th:href="@{/styles/detail.css}">
+
+	
 	<div id="main">
 		<div class="zg-wrap zu-main clearfix ">
 			<ul class="letter-list">

@@ -37,7 +37,7 @@ a {
 
 a:hover,
 a:focus {
-  color: #141719;
+  color: #00BC9B;
   text-decoration: none;
 }
 
@@ -15384,7 +15384,7 @@ html.no-touchevents .zu-top-nav-userinfo:hover {
     text-decoration:none
 }
 .zu-top-nav-link {
-    width:54px;
+    width:64px;
     height:45px;
     line-height:45px;
     text-align:center;
