@@ -21,12 +21,8 @@ public class FeedService {
 		return feedDao.getFeedById(id);
 	}
 	public List<Feed> getUserFeeds(List<Integer> userIds,int count){
-		List<Feed> list=new ArrayList<>();
-		for(int i:userIds) {
-			Feed feedByUser = feedDao.getFeedByUser(i, count);
-			list.add(feedByUser);
-		}
-		return list;
+		
+		return feedDao.getUserFolleesFeeds(userIds, count);
 	}
 
 }

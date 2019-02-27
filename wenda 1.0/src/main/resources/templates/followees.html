@@ -3,11 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <title>关注列表</title>
-<link rel="stylesheet" th:href="@{/styles/result.css}">
+<div class="My1" th:replace="header::header"></div>
+<link rel="stylesheet" th:href="@{/styles/index.css}">
 <link rel="stylesheet" th:href="@{/styles/detail.css}">
+<link rel="stylesheet" th:href="@{/styles/result.css}">
+
+
 </head>
 <body>
-<div class="My1" th:replace="header::header"></div>
+
 
     <div id="main">
         <div class="zg-wrap zu-main clearfix ">
@@ -21,11 +25,11 @@
                     <div id="zh-profile-follows-list">
                         <div class="zh-general-list clearfix">
                             <div class="zm-profile-card zm-profile-section-item zg-clear no-hovercard" th:each="map:${followees}">
-                                <div class="zg-right" th:if="${map['folloewd']}">
+                                <div class="zg-right" th:if="${map['followed']}">
                                     <button class="zg-btn zg-btn-unfollow zm-rich-follow-btn small nth-0
                                     js-follow-user" data-status="1" data-id="${map['user'].id}">取消关注</button>
                                 </div>
-                                <div class="zg-right" th:if="!${map['folloewd']}">
+                                <div class="zg-right" th:if="!${map['followed']}">
                                     <button class="zg-btn zg-btn-follow zm-rich-follow-btn small nth-0
                                     js-follow-user" data-id="${map['user'].id}">关注</button>
                                 </div>

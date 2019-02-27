@@ -4,34 +4,43 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.wenda.dao.FeedDao">
 	<sql id="feed_fields">id, user_id,created_date,data,url</sql>
-	
+
 	<insert id="addFeed">
-		insert into feed(<include refid="feed_fields"/>)
+		insert into feed(
+		<include refid="feed_fields" />
+		)
 		values(#{id},#{userId},#{createdDate},#{data},#{url})
 	</insert>
 	<select id="getFeedById" resultMap="feed">
-		select <include refid="feed_fields"/>
-		from feed 
+		select
+		<include refid="feed_fields" />
+		from feed
 		where id=#{id}
 	</select>
-	<select id="getFeedByUser" resultMap="feed">
-		SELECT <include refid="feed_fields"/>
-        FROM feed
-
-        WHERE user_id = #{userId}
-        ORDER BY id DESC
-        LIMIT #{count}
+	<select id="getUserFolleesFeeds" resultMap="feed">
+		SELECT
+		<include refid="feed_fields" />
+		FROM feed
+		
+		WHERE user_id in
+		<foreach collection="userIds" item="userId" separator=","
+			open="(" close=")">
+			#{userId}
+		</foreach>
+		
+		ORDER BY created_date DESC
+		LIMIT #{count}
 
 	</select>
-	
+
 	<resultMap type="cn.wenda.model.Feed" id="feed">
-		<id property="id" column="id"/>
-		<result property="userId" column="user_id"/>
-		<result property="createdDate" column="created_date"/>
-		<result property="url" column="url"/>
-		<result property="data" column="data"/>
-		
+		<id property="id" column="id" />
+		<result property="userId" column="user_id" />
+		<result property="createdDate" column="created_date" />
+		<result property="url" column="url" />
+		<result property="data" column="data" />
+
 	</resultMap>
-	
-	
+
+
 </mapper>

@@ -12,7 +12,10 @@ public interface FeedDao {
 
 	Feed getFeedById(Integer id);
 
-	Feed getFeedByUser(@Param("userId") int userId,
+	List<Feed> getFeedByUser(@Param("userId") int userId,
 			@Param("count") int count);
+	
+	List<Feed> getUserFolleesFeeds(@Param("userIds")List<Integer> userIds,
+			@Param("count")int count);
 
 }
