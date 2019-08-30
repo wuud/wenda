@@ -72,11 +72,11 @@
 			</div>
 			<button class="zu-top-add-question" id="zu-top-add-question">提问</button>
 			<div role="search" id="zh-top-search" class="zu-top-search">
-				<form method="post" th:action="@{/search}" id="zh-top-search-form"
+				<form method="get" th:action="@{/search}" id="zh-top-search-form"
 					class="zu-top-search-form">
-					<input type="hidden" name="type" value="content"> <label
+					<label
 						for="q" class="hide-text">问答搜索</label><input type="text"
-						class="zu-top-search-input" id="q" name="word" autocomplete="off"
+						class="zu-top-search-input" id="q" name="q" autocomplete="off"
 						placeholder="搜索你感兴趣的内容..." role="combobox"
 						aria-autocomplete="list">
 					<button type="submit" class="zu-top-search-button">
